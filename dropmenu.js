@@ -6,7 +6,8 @@ function menu() {
     d3.json().then((data) => {
     console.log(data)
     let states =data.states
-        for (let index = 0; index < names.length; index++) {
+        for (let index = 0; index < names.length; index++) 
+        {
             pullDown
             .append('option')
             .text(states[index])

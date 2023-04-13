@@ -6,13 +6,18 @@ function menu() {
     d3.json("../../data/county_covid.json").then((data) => {
     console.log(data)
     let state = data.state
-        for (let index = 0; index < state.length; index++) {
+        for (let i = 0; i < state.length; i++) 
+        {
+            let state_list = [];
+            let state_name = data.state[i];
+                if (state_name !== state_list) {
             dropdownMenu
             .append('option')
             .text(state[index])
             .property('value', state[index])
+            }
 
-    };
+        };
 
 
 let firstSample = state[0]
@@ -20,5 +25,7 @@ let firstSample = state[0]
             buildMetaData(firstSample);
             bubbleChart(firstSample); */
     });
+
+//end of menu function    
 }
  menu();
