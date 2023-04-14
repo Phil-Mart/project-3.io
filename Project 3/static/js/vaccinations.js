@@ -1,11 +1,12 @@
-vaccinations = metrics.vaccinationsCompletedRatio, metricsTimeseries.*.vaccinationsCompletedRatio
+//vaccinations = metrics.vaccinationsCompletedRatio, metricsTimeseries.*.vaccinationsCompletedRatio
+console.log(data);
 
 function guageChart(){
       // Fetch the JSON data and console log it
-      d3.json(county_covid).then(function(data) {
+      d3.json("./data/county_covid.json").then(function(data) {
         console.log(data);
-        let countiesdata = data.county_covid
-        console.log(countiesdata);
+        let countiesdata = data.county
+        console.log(statedata);
         let countiesresult = countiesdata.filter(county => county.fips == x)[0];
 
         vaccinations = countiesresult.vaccinationsCompletedRatio
