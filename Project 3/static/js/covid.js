@@ -8,96 +8,114 @@ function menu() {
     
     let state_list = [];
     let state = data.state;
-     
+    let county = data.county;
+    let county_index = [];
+    let county_list = [];
     
-    //console.log(state);
-        
+        // Only push unique state values
         for (const [key, value] of Object.entries(state)) {
-        console.log(`${key}: ${value}`);
+        //console.log(`${key}: ${value}`);
             if (!state_list.includes(value))
-            {state_list.push(value)}
-        };
+            {state_list.push(value)};
+        }
         
-
+        // Loop through the list and append new states
         for (let i = 0; i < state_list.length; i++) 
          {
             dropdownMenu
             .append('option')
             .text(state_list[i])
-            .property('value', state_list[i])
+            .property('value', state_list[i]);
             }
- 
-let firstSample = state[0]
-            //buildBarchart(firstSample);
-            //buildMetaData(firstSample);
-            bubbleChart(firstSample); 
+
+    let firstSample = counties(state[0]);
+        console.log(firstSample);
+        bubbleChart(firstSample); 
     });
+} 
+
+// Create a function for the dropdown menu to change
+function optionChanged(county){
+    let county_object= county(county);
+    console.log(county_object);
+    bubbleChart(county_object);
 }
 
-/* function buildBarchart(firstSample) {
-    // load data
+// Create a function to filter the county data by state
+function county(county)
+    {console.log("testing again");
     d3.json("./data/county_covid.json").then((data) => {
-    
-        //parse and filter data
-        let states = data.state;
-        let sampleArray = states.filter(sampleObj => sampleObj.id == firstSample);
-        let result = sampleArray[0];
-        console.log(result);
+        console.log(data);
 
-        //How do I pull flasked state names into 
-        // let state_name = result.state;
+    let state = data.state;
+    //let counties = data.county;
+    let county_index = [];
+    let county_list = [];
 
-        let state_labels = result.state;
-        let county = result.county
-        let state_infections = result.metrics.weeklyNewCasesPer100k;
-        console.log(state_infections);
-  
-        let yticks = county.slice(0,10).map(county => `${county}`).reverse();
+    // for (const [key, value] of Object.entries(state)) {
+    //         if ((value == county))
+    //         {county_index.push(key)}
+    //     };
 
-        // Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual.
-        let trace1 = {
-            // Use sample_values as the values for the bar chart.
-            x : state_infections.slice(0,10).reverse(),
-            // Use otu_ids as the labels for the bar chart.
-            y : yticks,
-            // Use otu_labels as the hovertext for the chart.
-            text: county.slice(0,10).reverse(),
-            type: 'bar',
-            orientation: 'h'
-    
-        };
-    
-        //turn data into array
-        let traceData = [trace1];
+    //let county_object = Object.fromEntries(Object.entries(obj).filter(([key]) => key.includes(key)));
+    let county_object = {"actuals": {
+        "0": {
+            "cases": 811,
+            "deaths": 0,
+            "positiveTests": null,
+            "negativeTests": null,
+            "contactTracers": null,
+            "hospitalBeds": {
+                "capacity": null,
+                "currentUsageTotal": null,
+                "currentUsageCovid": null,
+                "weeklyCovidAdmissions": null
+            },
+            "hsaHospitalBeds": {
+                "capacity": 822,
+                "currentUsageTotal": 669,
+                "currentUsageCovid": 13,
+                "weeklyCovidAdmissions": 11
+            },
+            "icuBeds": {
+                "capacity": null,
+                "currentUsageTotal": null,
+                "currentUsageCovid": null
+            },
+            "hsaIcuBeds": {
+                "capacity": 78,
+                "currentUsageTotal": 65,
+                "currentUsageCovid": 1
+            },
+            "newCases": 0,
+            "newDeaths": 0,
+            "vaccinesDistributed": null,
+            "vaccinationsInitiated": 2900,
+            "vaccinationsCompleted": 2498,
+            "vaccinationsAdditionalDose": 1037,
+            "vaccinationsFall2022BivalentBooster": 196,
+            "vaccinesAdministered": null,
+            "vaccinesAdministeredDemographics": null,
+            "vaccinationsInitiatedDemographics": null
+        }}};
 
-        let layout = {
-        title: (`Most Infected Counties in ${states}:`) ,
-        margin: {
-          l: 100,
-          r: 100,
-          t: 100,
-          b: 100
-        }
-        };
+    console.log(county_object);
 
-        //call the bar chart (html, array, kwargs)
-        Plotly.newPlot("bar", traceData, layout);
-}); */
+    /* Object.keys(counties)
+    .filter(key => county_index.includes(key))
+    .reduce((obj, key) => {
+        obj[key] = counties[key]; */
+        return county_object;
+    })}
 
-//end of buildChart funct()
+   /*  Object.values(county_object).forEach(val => {
+        {county_list.push(val)}
+      }); */
 
 function bubbleChart(firstSample) {
+    console.log(firstSample);
     //load data
-     d3.json("./data/county_covid.json").then((data) => {
-
-    let county = data.county 
-
-    const jsonObject = [data.county]
-    sampleArray = Object.keys(county). filter((key) => key.includes('Name')).reduce((cur, key) => { return Object.assign(obj, {
-        [key]: county [key]
-      })}, {});
-    results = sampleArray[0]
-
+     //d3.json("./data/county_covid.json").then((data) => {
 
 //  Use States for the x values.
     //  Use Death Rates for the y values.
@@ -106,31 +124,27 @@ function bubbleChart(firstSample) {
     //  Use Population,State,Death Rate for the text values.
 
         let trace = {
-    
-        x: results.actuals.deaths,
-        y: results.population,
-        text: results.state,
-        text: results.actuals.deaths,
-        text: results.population,
+        x: firstSample.actuals.deaths,
+        y: firstSample.population,
+        text: firstSample.state,
+        text: firstSample.actuals.deaths,
+        text: firstSample.population,
         mode: 'markers',
         marker: {
-            size: results.population,
-            color: results.state
-            }
-                
-
+            size: firstSample.population,
+            color: firstSample.state
+            }      
         };
+
+        var data = [trace];
 
         bubbleLayout= {
             title: 'State Deaths by Population Size',
             xaxis: {title: 'Deaths Per State'}
         };
 
-        Plotly.newPlot('bubble', [trace], bubbleLayout);
+Plotly.newPlot('bubble', data, bubbleLayout);
 
-    });
-
-
-}
+    }; 
 
  menu();
