@@ -28,7 +28,7 @@ function menu() {
             .property('value', state_list[i]);
             }
 
-    let firstSample = counties(state[0]);
+    let firstSample = county(state[0]);
         console.log(firstSample);
         bubbleChart(firstSample); 
     });
