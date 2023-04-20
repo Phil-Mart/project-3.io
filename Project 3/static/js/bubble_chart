@@ -1,0 +1,29 @@
+// Create a bubble chart to plot county deaths vs. population size
+function bubbleChart(firstSample) {
+    console.log(firstSample[0].deaths);
+    
+    //load data
+     d3.json("./data/county_covid.json").then((data) => {
+        console.log(data);
+    
+    for (let i = 0; i < firstSample.length; i++) {
+    deaths = firstSample(firstSample => firstSample[deaths])
+    console.log(firstSample[i].deaths);
+    }; 
+        data1 = {
+        x: firstSample.deaths,
+        y: firstSample.population,
+        mode: 'markers',
+        marker: {
+            size: firstSample.population,
+            color: firstSample.deaths
+            }     
+        };
+
+        bubbleLayout= {
+            title: 'State Deaths by Population Size',
+            xaxis: {title: 'Deaths Per State'}
+        }})};
+
+        Plotly.newPlot('bubble', data1, bubbleLayout); 
+    
