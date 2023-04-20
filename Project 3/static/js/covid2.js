@@ -3,8 +3,8 @@ function menu() {
     // Use D3 to select the dropdown menu
     let dropdownMenu = d3.select("#selDataset");
     // Assign the value of the dropdown menu option to a variable
-    d3.json("./data/county_covid.json").then((data) => {
-    console.log(data);
+    d3.json("./data/filtered_covid.json").then((data) => {
+    // console.log(data);
     
     let state_list = [];
     let state = data.state;
@@ -15,7 +15,7 @@ function menu() {
         for (const [key, value] of Object.entries(state)) {
             if (!state_list.includes(value))
             {state_list.push(value)};
-        }
+        };
         
         // Loop through the list and append new states
         for (let i = 0; i < state_list.length; i++) 
@@ -24,8 +24,9 @@ function menu() {
             .append('option')
             .text(state_list[i])
             .property('value', state_list[i]);
-            }
-        console.log(state_list[0]);
+            console.log(state_list[0]);
+            };
+
 
     // Selecting the first state AK
     let firstSample = county(county_list,state_list[0]);
@@ -44,9 +45,9 @@ function optionChanged(state_list){
 }
 
 // Create a function to filter the county data by state
-function county(county_data, inputstate)
-    {console.log("testing again");
-    d3.json("./data/county_covid.json").then((data) => {
+function county(county_data, inputstate) {
+    // {console.log("testing again");
+    d3.json("./data/filtered_covid.json").then((data) => {
         console.log(data);
 
     let state = data.state;
@@ -79,7 +80,7 @@ function bubbleChart(firstSample) {
     console.log(firstSample[0].deaths);
     
     //load data
-     d3.json("./data/county_covid.json").then((data) => {
+     d3.json("./data/filtered_covid.json").then((data) => {
         console.log(data);
     
     for (let i = 0; i < firstSample.length; i++) {
