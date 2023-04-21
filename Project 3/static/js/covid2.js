@@ -85,11 +85,12 @@ menu();
 
 function buildBarchart(sample) {
     // load data
-    d3.json('./old_files/covid.json').then((data) => {
+    d3.json("./data/county_covid.json").then((data) => {
     
         //parse and filter data
         let county = data.county;
-        let countyArray = county.filter(countyObj => countyObj.id == sample);
+        console.log(county);
+        let countyArray = county.filter(countyObj => countyObj.fips == sample);
         let result = countyArray[0];
         console.log(result);
         
