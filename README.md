@@ -33,10 +33,15 @@ Project 3
 # Output/Analyses
 
 ## Part 1: Data and Delivery
+Data: We used an open-source API, CovidActNow.org
+Delivery: From the API, we parsed through pandas and exported to a json 
 
 ## Part 2: Back End
+Database: mongoDB
+JavaScript: 
 
 ## Part 3: Data Visualizations
+
 
 ## Part 4: Group Presentation
 
