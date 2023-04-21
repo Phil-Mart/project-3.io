@@ -42,6 +42,7 @@
 <img width="788" alt="Screenshot 2023-04-20 at 9 21 17 PM" src="https://user-images.githubusercontent.com/119909433/233525498-014af21a-f457-4ac0-ab41-3585e9e75bf8.png">
 
 - We housed the data in mongoDB
+![screen_shot_2023-04-20_at_9 37 23_pm_720](https://user-images.githubusercontent.com/119909433/233527675-b6ee280c-fe37-4537-9eb2-016fd07a4b9d.png)
 
 
 - We created html and css files for the dashboard
