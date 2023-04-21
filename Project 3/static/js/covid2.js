@@ -85,7 +85,7 @@ menu();
 
 function buildBarchart(sample) {
     // load data
-    d3.json('./data/county_covid.json').then((data) => {
+    d3.json('./old_files/covid.json').then((data) => {
     
         //parse and filter data
         let county = data.county;
@@ -142,7 +142,7 @@ function bubbleChart(sample) {
     // console.log(firstSample[0].deaths);
     
     //load data
-     d3.json("./data/county_covid.json").then((data) => {
+    d3.json("./data/county_covid.json").then((data) => {
         // console.log(data);
 
         //parse & filter the data
